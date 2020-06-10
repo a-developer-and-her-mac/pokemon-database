@@ -98,7 +98,7 @@ let pokemonRepository = (function() {
     $('modal').append('contentElement');
     $('modalContainer').append('modal');
 
-    modalContainer.addClass('is-visible');
+    $('modalContainer').addClass('is-visible');
   }
 
   function hideModal() {
@@ -114,7 +114,7 @@ let pokemonRepository = (function() {
   });
 
   //hides modal when close button is hit
-  $(modalContainer).on('click', (e) => {
+  $('modalContainer').on('click', (e) => {
     let target = e.target;
     if (target === modalContainer) {
       hideModal();
