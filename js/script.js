@@ -14,6 +14,12 @@ let pokemonRepository = (function() {
     let ulElement = $('.pokemon-list');
     let listItem = $('<li></li>');
     let button = $('<button class="button-class">' + pokemon.name + '</button>');
+    // change color on hover
+    $(button).hover(function() {
+      $(this).css('background-color', '#947397');
+    }, function() {
+      $(this).css('background-color', '#d8bfd8');
+    });
     $(ulElement).append(listItem);
     $(listItem).append(button);
     $(button).on('click', function(event) {
@@ -45,7 +51,7 @@ let pokemonRepository = (function() {
     return $.ajax(url, {
       dataType: 'json'
     }).then(function(response) {
-      return response;//.json();
+      return response;
     }).then(function(details) {
       item.imageUrl = details.sprites.front_default;
       item.height = details.height;
@@ -83,9 +89,7 @@ let pokemonRepository = (function() {
     let contentElement = $('<p> Height: ' + pokemonHeight + '</p>');
 
     let imageElement = $('<img class="pokemon-image"></img>');
-    $(imageElement). attr("src", pokemonImage);
-    //imageElement.src = pokemonImage;
-
+    $(imageElement).attr("src", pokemonImage);
 
 
     $(modal).append(closeButtonElement);
