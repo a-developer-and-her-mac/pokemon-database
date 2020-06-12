@@ -45,7 +45,7 @@ let pokemonRepository = (function() {
     return $.ajax(url, {
       dataType: 'json'
     }).then(function(response) {
-      return response.json();
+      return response;//.json();
     }).then(function(details) {
       item.imageUrl = details.sprites.front_default;
       item.height = details.height;
@@ -70,48 +70,49 @@ let pokemonRepository = (function() {
     const pokemonHeight = pokemon.height;
     const pokemonImage = pokemon.imageUrl;
     // Clear all existing modal content
-    $('modalContainer').html('');
+    $(modalContainer).html('');
 
     let modal = $('<div class="modal"></div>');
 
     // Add the new modal content
-    let closeButtonElement = $('<button class="modal-close">Close</button');
-    $('closeButtonElement').on('click', hideModal);
+    let closeButtonElement = $('<button class="modal-close">Close</button>');
+    $(closeButtonElement).on('click', hideModal);
 
     let titleElement = $('<h1>' + pokemonName + '</h1>');
 
-    let contentElement = $('<p>"Height: ' + pokemonHeight + '</p>');
+    let contentElement = $('<p> Height: ' + pokemonHeight + '</p>');
 
     let imageElement = $('<img class="pokemon-image"></img>');
-    imageElement.src = pokemonImage;
+    $(imageElement). attr("src", pokemonImage);
+    //imageElement.src = pokemonImage;
 
 
 
-    $('modal').append(closeButtonElement);
-    $('modal').append(titleElement);
-    $('modal').append(imageElement);
-    $('modal').append(contentElement);
-    $('modalContainer').append('modal');
+    $(modal).append(closeButtonElement);
+    $(modal).append(titleElement);
+    $(modal).append(imageElement);
+    $(modal).append(contentElement);
+    $(modalContainer).append(modal);
 
-    $('modalContainer').addClass('is-visible');
+    $(modalContainer).addClass('is-visible');
   }
 
   function hideModal() {
-    $('modalContainer').removeClass('is-visible');
+    $(modalContainer).removeClass('is-visible');
   }
 
 
   // hides modal when Escape key is hit
   $(window).on('keydown', (e) => {
-    if (e.key === 'Escape' && $('modalContainer').hasClass('is-visible')) {
+    if (e.key === 'Escape' && $(modalContainer).hasClass('is-visible')) {
       hideModal();
     }
   });
 
   //hides modal when close button is hit
-  $('modalContainer').on('click', (e) => {
+  $(modalContainer).on('click', (e) => {
     let target = e.target;
-    if (target === modalContainer) {
+    if (target === $(modalContainer)) {
       hideModal();
     }
   });
