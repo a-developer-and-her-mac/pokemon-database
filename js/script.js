@@ -13,10 +13,10 @@ let pokemonRepository = (function() {
   function addListItem(pokemon) {
     let ulElement = $('.pokemon-list');
     let listItem = $('<li></li>');
-    let button = $('<button class="button-class">' pokemon.name '</button>');
-    $('ulElement').append('listItem');
-    $('listItem').append('button');
-    $('button').on('click', function(event) {
+    let button = $('<button class="button-class">' + pokemon.name + '</button>');
+    $(ulElement).append(listItem);
+    $(listItem).append(button);
+    $(button).on('click', function(event) {
       showDetails(pokemon);
 
     })
@@ -78,19 +78,19 @@ let pokemonRepository = (function() {
     let closeButtonElement = $('<button class="modal-close">Close</button');
     $('closeButtonElement').on('click', hideModal);
 
-    let titleElement = $('<h1>' pokemonName '</h1>');
+    let titleElement = $('<h1>' + pokemonName + '</h1>');
 
-    let contentElement = $('<p>' "Height: " + pokemonHeight '</p>');
+    let contentElement = $('<p>"Height: ' + pokemonHeight + '</p>');
 
     let imageElement = $('<img class="pokemon-image"></img>');
     imageElement.src = pokemonImage;
 
 
 
-    $('modal').append('closeButtonElement');
-    $('modal').append('titleElement');
-    $('modal').append('imageElement');
-    $('modal').append('contentElement');
+    $('modal').append(closeButtonElement);
+    $('modal').append(titleElement);
+    $('modal').append(imageElement);
+    $('modal').append(contentElement);
     $('modalContainer').append('modal');
 
     $('modalContainer').addClass('is-visible');
