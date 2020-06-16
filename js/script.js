@@ -1,4 +1,3 @@
-
 let pokemonRepository = (function() {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
@@ -18,7 +17,7 @@ let pokemonRepository = (function() {
 
     // change color on hover
 
-   $(button).hover(function() {
+    $(button).hover(function() {
       $(this).css('background-color', '#947397');
     }, function() {
       $(this).css('background-color', '#d8bfd8');
@@ -82,8 +81,8 @@ let pokemonRepository = (function() {
     let modalTitle = $('.modal-title');
 
     // Clear all existing modal content
-    $('modalBody').empty();
-    $('modalTitle').empty();
+    $(modalBody).empty();
+    $(modalTitle).empty();
 
     // Add the new modal content
 
@@ -117,5 +116,17 @@ let pokemonRepository = (function() {
 pokemonRepository.loadList().then(function() {
   pokemonRepository.getAll().forEach(function(pokemon) {
     pokemonRepository.addListItem(pokemon);
+  });
+});
+
+
+//search
+
+$(document).ready(function() {
+  $("#searchInput").on("keyup", function() {
+    let value = $(this).val().toLowerCase();
+    $("#pokemon-container *").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+    });
   });
 });
