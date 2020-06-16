@@ -12,17 +12,14 @@ let pokemonRepository = (function() {
 
   function addListItem(pokemon) {
     let ulElement = $('.pokemon-list');
-    let listItem = $('<li class="list-group-item border-0"></li>');
-    let button = $('<button type="button" class="btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#modalContainer">' + pokemon.name + '</button>');
-
+    let listItem = $('<li></li>');
+    let button = $('<button class="button-class">' + pokemon.name + '</button>');
     // change color on hover
-
-   $(button).hover(function() {
+    $(button).hover(function() {
       $(this).css('background-color', '#947397');
     }, function() {
       $(this).css('background-color', '#d8bfd8');
     });
-
     $(ulElement).append(listItem);
     $(listItem).append(button);
     $(button).on('click', function(event) {
@@ -72,19 +69,20 @@ let pokemonRepository = (function() {
     });
   }
 
+  let modalContainer = $('#modal-container');
+
   function showModal(pokemon) {
     const pokemonName = pokemon.name;
     const pokemonHeight = pokemon.height;
     const pokemonImage = pokemon.imageUrl;
-
-    let modalBody = $('.modal-body');
-    let modalTitle = $('.modal-title');
-
     // Clear all existing modal content
-    $('modalBody').empty();
-    $('modalTitle').empty();
+    $(modalContainer).html('');
+
+    let modal = $('<div class="modal"></div>');
 
     // Add the new modal content
+    let closeButtonElement = $('<button class="modal-close">Close</button>');
+    $(closeButtonElement).on('click', hideModal);
 
     let titleElement = $('<h1>' + pokemonName + '</h1>');
 
@@ -94,11 +92,34 @@ let pokemonRepository = (function() {
     $(imageElement).attr("src", pokemonImage);
 
 
-    $(modalTitle).append(titleElement);
-    $(modalBody).append(imageElement);
-    $(modalBody).append(contentElement);
+    $(modal).append(closeButtonElement);
+    $(modal).append(titleElement);
+    $(modal).append(imageElement);
+    $(modal).append(contentElement);
+    $(modalContainer).append(modal);
 
+    $(modalContainer).addClass('is-visible');
   }
+
+  function hideModal() {
+    $(modalContainer).removeClass('is-visible');
+  }
+
+
+  // hides modal when Escape key is hit
+  $(window).on('keydown', (e) => {
+    if (e.key === 'Escape' && $(modalContainer).hasClass('is-visible')) {
+      hideModal();
+    }
+  });
+
+  //hides modal when close button is hit
+  $(modalContainer).on('click', (e) => {
+    let target = e.target;
+    if (target === $(modalContainer)) {
+      hideModal();
+    }
+  });
 
 
   return {
@@ -109,6 +130,7 @@ let pokemonRepository = (function() {
     loadDetails: loadDetails,
     showDetails: showDetails,
     showModal: showModal,
+    hideModal: hideModal
   };
 })();
 
