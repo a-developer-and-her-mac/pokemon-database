@@ -1,6 +1,6 @@
 let pokemonRepository = (function() {
-  let pokemonList = [];
-  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  let pokemonList = [],
+      apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   function add(pokemon) {
     pokemonList.push(pokemon);
@@ -11,9 +11,9 @@ let pokemonRepository = (function() {
   }
 
   function addListItem(pokemon) {
-    let ulElement = $('.pokemon-list');
-    let listItem = $('<li class="list-group-item border-0"></li>');
-    let button = $(
+    let ulElement = $('.pokemon-list'),
+        listItem = $('<li class="list-group-item border-0"></li>'),
+        button = $(
       '<button type="button" class="btn btn-outline-dark btn-lg" data-toggle="modal" data-target="#modalContainer">' +
         pokemon.name +
         '</button>'
@@ -76,18 +76,17 @@ let pokemonRepository = (function() {
 
   function showDetails(item) {
     loadDetails(item).then(function() {
-      console.log(item);
       showModal(item);
     });
   }
 
   function showModal(pokemon) {
-    const pokemonName = pokemon.name;
-    const pokemonHeight = pokemon.height;
-    const pokemonImage = pokemon.imageUrl;
+    const pokemonName = pokemon.name,
+          pokemonHeight = pokemon.height,
+          pokemonImage = pokemon.imageUrl;
 
-    let modalBody = $('.modal-body');
-    let modalTitle = $('.modal-title');
+    let modalBody = $('.modal-body'),
+        modalTitle = $('.modal-title');
 
     // Clear all existing modal content
     $(modalBody).empty();
@@ -95,11 +94,9 @@ let pokemonRepository = (function() {
 
     // Add the new modal content
 
-    let titleElement = $('<h1>' + pokemonName + '</h1>');
-
-    let contentElement = $('<p> Height: ' + pokemonHeight + '</p>');
-
-    let imageElement = $('<img class="pokemon-image"></img>');
+    let titleElement = $('<h1>' + pokemonName + '</h1>'),
+        contentElement = $('<p> Height: ' + pokemonHeight + '</p>'),
+        imageElement = $('<img class="pokemon-image"></img>');
     $(imageElement).attr('src', pokemonImage);
 
     $(modalTitle).append(titleElement);
