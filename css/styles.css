@@ -3,6 +3,10 @@ body {
   margin-top: 60px;
 }
 
+button:hover {
+  background: #947397;
+}
+
 .btn-lg {
   background-color: #d8bfd8;
   font-size: 20px;

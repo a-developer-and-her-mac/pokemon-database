@@ -19,16 +19,6 @@ let pokemonRepository = (function() {
         '</button>'
     );
 
-    // change color on hover
-
-    $(button).hover(
-      function() {
-        $(this).css('background-color', '#947397');
-      },
-      function() {
-        $(this).css('background-color', '#d8bfd8');
-      }
-    );
 
     $(ulElement).append(listItem);
     $(listItem).append(button);
